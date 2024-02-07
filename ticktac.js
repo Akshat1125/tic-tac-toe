@@ -1,8 +1,10 @@
-console.log('Welcome to tic tac taoe')
+// console.log('Welcome to tic tac taoe')
 let music = new Audio("game.mp3")
 let gameover = new Audio("aliens.mp3")
 let turn = "X"
+let boxes = document.getElementsByClassName("box");
 let isgameover=false;
+let Mquery = window.matchMedia("(min-width: 700px)")
 
 //function to change turn
 const changeTurn = () =>{
@@ -27,8 +29,9 @@ const checkWin = ()=>{
         document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won"
         isgameover = true
         document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "250px";
+        if(Mquery.matches){
   document.querySelector('.line').style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`
-  document.querySelector(".line").style.width = "20vw";
+  document.querySelector(".line").style.width = "20vw";}
 }
  })
 
@@ -36,18 +39,17 @@ const checkWin = ()=>{
 
 //game logic
 //music.play()
-let boxes = document.getElementsByClassName("box");
 Array.from(boxes).forEach(element =>{
     let boxtext = element.querySelector('.boxtext');
-    element.addEventListener('click', ()=>{
-        if(boxtext.innerText === ''){
+    element.addEventListener('click', function pip(){
+        checkWin()
+        if(boxtext.innerText === ''&&!isgameover){
+            checkWin()
             boxtext.innerText = turn;
             turn=changeTurn();
             gameover.play();
-            checkWin();
-            if(!isgameover){
             document.getElementsByClassName("info")[0].innerText ="Turn for " + turn;
-        }}
+        }
     })
 })
 //reset logic
