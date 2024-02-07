@@ -8,9 +8,9 @@ let Mquery = window.matchMedia("(min-width: 700px)")
 
 //function to change turn
 const changeTurn = () =>{
-    checkWin()
     return turn === "X"? "0": "X"
 }
+
 
 //function to check for a win
 const checkWin = ()=>{
@@ -44,13 +44,13 @@ const checkWin = ()=>{
 Array.from(boxes).forEach(element =>{
     let boxtext = element.querySelector('.boxtext');
     element.addEventListener('click', function pip(){
-        checkWin()
         if(!isgameover)
         if(boxtext.innerText === ''){
             boxtext.innerText = turn;
             turn=changeTurn();
             gameover.play();
             document.getElementsByClassName("info")[0].innerText ="Turn for " + turn;
+            checkWin();
         }
     })
 })
