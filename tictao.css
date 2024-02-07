@@ -87,6 +87,8 @@ position: relative;
     }
     .gameinfo{
         margin-top: 34px;
+        display: flex;
+        flex-direction: column-reverse;
     }
     .container {
         grid-template-rows: repeat(3, 20vw);

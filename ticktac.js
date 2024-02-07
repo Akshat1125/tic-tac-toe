@@ -8,6 +8,7 @@ let Mquery = window.matchMedia("(min-width: 700px)")
 
 //function to change turn
 const changeTurn = () =>{
+    checkWin()
     return turn === "X"? "0": "X"
 }
 
@@ -32,6 +33,7 @@ const checkWin = ()=>{
         if(Mquery.matches){
   document.querySelector('.line').style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`
   document.querySelector(".line").style.width = "20vw";}
+
 }
  })
 
@@ -43,8 +45,8 @@ Array.from(boxes).forEach(element =>{
     let boxtext = element.querySelector('.boxtext');
     element.addEventListener('click', function pip(){
         checkWin()
-        if(boxtext.innerText === ''&&!isgameover){
-            checkWin()
+        if(!isgameover)
+        if(boxtext.innerText === ''){
             boxtext.innerText = turn;
             turn=changeTurn();
             gameover.play();
